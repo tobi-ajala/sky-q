@@ -1,0 +1,11 @@
+.itemsList-ul {
+  list-style-type: none;
+}
+
+.itemsList-ul li {
+  padding: 5px;
+}
+
+.itemDelete-button {
+  margin: 5px;
+}
