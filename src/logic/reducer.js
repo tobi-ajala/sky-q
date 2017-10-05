@@ -1,12 +1,12 @@
-import { ADD_ITEM, DELETE_ITEM } from './constants';
+import { ADD_ITEM, DELETE_ITEM, CHANGE_ITEM_STATUS } from './constants';
 
 let nextId = 4;
 
 export const initialState = {
   items: [
     { id: 1, content: 'Call mum', status: 'pending' },
-    { id: 2, content: 'Buy cat food', status: 'pending' },
-    { id: 3, content: 'Water the plants', status: 'completed' },
+    { id: 2, content: 'Buy cat food', status: 'complete' },
+    { id: 3, content: 'Water the plants', status: 'complete' },
   ],
 };
 
@@ -31,6 +31,17 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         items: newData
+      };
+    case CHANGE_ITEM_STATUS:
+      // let actualItem = state.items.filter((item) => item.id === action.payload.itemId)
+      // actualItem['status'] = action.payload.status;
+      const { itemId, itemStatus } = action.payload;
+      const items = state.items.map((item) => item.id === itemId ? {
+        ...item, status: itemStatus
+      } : item);
+      return {
+        ...state,
+        items
       };
     default:
       return state;
